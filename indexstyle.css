@@ -1,0 +1,138 @@
+
+
+/* 添加平滑滚动动画 */
+html {
+    scroll-behavior: smooth;
+}
+
+
+/* Reset some default styles */
+body, h1, h2, p {
+    margin: 0;
+    padding: 0;
+}
+
+
+
+
+
+
+/* Styling for the header */
+header {
+    background-color: rgba(89,114,192,0.8);
+    color: white;
+    text-align: center;
+    padding: 10px 0; /* Increase the top and bottom padding for more spacing */
+}
+
+header h1 {
+    font-family: "Comic Sans MS", cursive, sans-serif; /* 使用草书字体 */
+    font-size: 36px; /* Adjust the font size as needed */
+    margin-bottom: 0px; /* Add some space below the title */
+}
+
+header p {
+    font-size: 18px; /* Adjust the font size as needed */
+}
+
+/* Navigation menu styling */
+nav {
+    background-color: rgba(89,114,192,0.8);
+    padding: 10px 0;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center; /* 将菜单项均匀分布 */
+    align-items: center;
+    padding: 0;
+    margin: 0;
+}
+
+nav li {
+    display: flex;
+    margin: 0 15px;
+}
+
+nav a {
+    font-family: "Comic Sans MS", cursive, sans-serif; /* 使用草书字体 */
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    /* transition: color 0.3s ease; */
+    transition: background-color 0.3s ease; /* 添加过渡效果 */
+}
+
+nav a:hover {
+    color: #ff9900;
+}
+
+
+/* Hero section styling */
+#hero {
+    background-color: rgba(255, 255, 255, 0); /* 添加背景颜色和透明度 */
+    padding: 30px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.hero-content {
+    display: flex;
+    flex-direction: column; /* 垂直排列 */
+    align-items: space-around;
+    align-items: center;
+}
+
+
+/* Styling for the avatar */
+.avatar {
+    text-align: center;
+}
+
+.avatar img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%; /* Make the image round */
+    border: 5px solid #fff; /* Add a white border around the image */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+}
+
+
+
+
+
+
+/* Styling for the "About Me" section */
+.personal-info {
+    padding: 10px;
+    /* background-color: #f9f9f9; */
+    background-color: rgba(255, 255, 255, 0.3); /* 添加背景颜色和透明度 */
+    backdrop-filter: blur(10px); /* 应用模糊效果 */
+    text-align: center;
+    border-radius: 10px; /* Add rounded corners to the section */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+}
+
+/* 添加样式以美化 "About Me" 部分的文字 */
+.personal-info h2 {
+    font-family: "Times New Roman", serif; /* 更换字体 */
+    font-size: 28px; /* 调整标题的字体大小 */
+    color: #333; /* 设置标题的文本颜色 */
+    margin-bottom: 15px; /* 添加一些底部间距 */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* 添加文本阴影 */
+}
+
+.personal-info p {
+    font-family: "Comic Sans MS", cursive, sans-serif; /* 使用草书字体 */
+    font-size: 18px; /* 调整文本的字体大小 */
+    color: #666; /* 设置文本的文本颜色 */
+    line-height: 1.6; /* 调整行高，增加可读性 */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* 添加文本阴影 */
+}
+
+
+
+
