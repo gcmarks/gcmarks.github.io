@@ -1,0 +1,706 @@
+
+<!DOCTYPE html><html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.29.1" theme-name="Stellar" theme-version="1.29.1">
+  
+  <meta name="generator" content="Hexo 7.3.0">
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000">
+  <meta name="theme-color" content="#f9fafb">
+  
+  <title>UDA 论文阅读 - Echo的小站</title>
+
+  
+    <meta name="description" content="Unsupervised domain adaptation Related workCT-&gt;MRI&amp;MRI-&gt;CT datasetMMWHS：Multi-Modality Whole Heart Segmentation 2017 CHAOS：MICCAI 2017 可能参考的论文不够多 任务： 医学图像通常来自不同的中心、使用不同参数的不同扫描仪或不同的成像模式，这导致了它">
+<meta property="og:type" content="article">
+<meta property="og:title" content="UDA 论文阅读">
+<meta property="og:url" content="https://cmarks.cn/2025/04/09/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/index.html">
+<meta property="og:site_name" content="Echo的小站">
+<meta property="og:description" content="Unsupervised domain adaptation Related workCT-&gt;MRI&amp;MRI-&gt;CT datasetMMWHS：Multi-Modality Whole Heart Segmentation 2017 CHAOS：MICCAI 2017 可能参考的论文不够多 任务： 医学图像通常来自不同的中心、使用不同参数的不同扫描仪或不同的成像模式，这导致了它">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-04-08T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-04-10T08:58:54.000Z">
+<meta property="article:author" content="Echo">
+<meta property="article:tag" content="论文阅读">
+<meta property="article:tag" content="Domain Adaptation">
+<meta property="article:tag" content="Unsupervised Domain Adaptation">
+<meta name="twitter:card" content="summary">
+  
+  
+  
+  <meta name="keywords" content="论文阅读,Domain Adaptation,Unsupervised Domain Adaptation">
+
+  <!-- feed -->
+  
+
+  <link rel="stylesheet" href="/css/main.css?v=1.29.1">
+
+  
+
+  
+
+  
+</head>
+<body>
+
+<div class="l_body s:aa content tech" id="start" layout="post" ><aside class="l_left"><div class="leftbar-container">
+
+
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://avatars.githubusercontent.com/u/109862200?s=400&u=7c44d047f47a4c4e8d921cfd1040e1255ddabe67&v=4" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">Echo的小站</div><div class="sub cap">null</div></a></div></header>
+
+<div class="nav-area">
+<div class="search-wrapper" id="search-wrapper"><form class="search-form"><a class="search-button" onclick="document.getElementById(&quot;search-input&quot;).focus();"><svg t="1705074644177" viewBox="0 0 1025 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1560" width="200" height="200"><path d="M1008.839137 935.96571L792.364903 719.491476a56.783488 56.783488 0 0 0-80.152866 0 358.53545 358.53545 0 1 1 100.857314-335.166073 362.840335 362.840335 0 0 1-3.689902 170.145468 51.248635 51.248635 0 1 0 99.217358 26.444296 462.057693 462.057693 0 1 0-158.255785 242.303546l185.930047 185.725053a51.248635 51.248635 0 0 0 72.568068 0 51.248635 51.248635 0 0 0 0-72.978056z" p-id="1561"></path><path d="M616.479587 615.969233a50.428657 50.428657 0 0 0-61.498362-5.534852 174.655348 174.655348 0 0 1-177.525271 3.484907 49.403684 49.403684 0 0 0-58.833433 6.76482l-3.074918 2.869923a49.403684 49.403684 0 0 0 8.609771 78.10292 277.767601 277.767601 0 0 0 286.992355-5.739847 49.403684 49.403684 0 0 0 8.404776-76.667958z" p-id="1562"></path></svg></a><input type="text" class="search-input" id="search-input" placeholder="站内搜索"></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div>
+
+
+<nav class="menu dis-select"><a class="nav-item active" title="博客" href="/" style="color:#1BCDFC"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M5.879 2.879C5 3.757 5 5.172 5 8v8c0 2.828 0 4.243.879 5.121C6.757 22 8.172 22 11 22h2c2.828 0 4.243 0 5.121-.879C19 20.243 19 18.828 19 16V8c0-2.828 0-4.243-.879-5.121C17.243 2 15.828 2 13 2h-2c-2.828 0-4.243 0-5.121.879M8.25 17a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 0 1.5H9a.75.75 0 0 1-.75-.75M9 12.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5zM8.25 9A.75.75 0 0 1 9 8.25h6a.75.75 0 0 1 0 1.5H9A.75.75 0 0 1 8.25 9" clip-rule="evenodd"/><path fill="currentColor" d="M5.235 4.058C5 4.941 5 6.177 5 8v8c0 1.823 0 3.058.235 3.942L5 19.924c-.975-.096-1.631-.313-2.121-.803C2 18.243 2 16.828 2 14v-4c0-2.829 0-4.243.879-5.121c.49-.49 1.146-.707 2.121-.803zm13.53 15.884C19 19.058 19 17.822 19 16V8c0-1.823 0-3.059-.235-3.942l.235.018c.975.096 1.631.313 2.121.803C22 5.757 22 7.17 22 9.999v4c0 2.83 0 4.243-.879 5.122c-.49.49-1.146.707-2.121.803z" opacity=".5"/></svg></a><a class="nav-item" title="文档" href="/wiki/" style="color:#3DC550"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M14.25 4.48v3.057c0 .111 0 .27.02.406a.936.936 0 0 0 .445.683a.96.96 0 0 0 .783.072c.13-.04.272-.108.378-.159L17 8.005l1.124.534c.106.05.248.119.378.16a.958.958 0 0 0 .783-.073a.936.936 0 0 0 .444-.683c.021-.136.021-.295.021-.406V3.031c.113-.005.224-.01.332-.013C21.154 2.98 22 3.86 22 4.933v11.21c0 1.112-.906 2.01-2.015 2.08c-.97.06-2.108.179-2.985.41c-1.082.286-1.99 1.068-3.373 1.436c-.626.167-1.324.257-1.627.323V5.174c.32-.079 1.382-.203 1.674-.371c.184-.107.377-.216.576-.323m5.478 8.338a.75.75 0 0 1-.546.91l-4 1a.75.75 0 0 1-.364-1.456l4-1a.75.75 0 0 1 .91.546" clip-rule="evenodd"/><path fill="currentColor" d="M18.25 3.151c-.62.073-1.23.18-1.75.336a8.2 8.2 0 0 0-.75.27v3.182l.75-.356l.008-.005a1.13 1.13 0 0 1 .492-.13c.047 0 .094.004.138.01c.175.029.315.1.354.12l.009.005l.749.356V3.647z"/><path fill="currentColor" d="M12 5.214c-.334-.064-1.057-.161-1.718-.339C8.938 4.515 8.05 3.765 7 3.487c-.887-.234-2.041-.352-3.018-.412C2.886 3.007 2 3.9 2 4.998v11.146c0 1.11.906 2.01 2.015 2.079c.97.06 2.108.179 2.985.41c.486.129 1.216.431 1.873.726c1.005.451 2.052.797 3.127 1.034z" opacity=".5"/><path fill="currentColor" d="M4.273 12.818a.75.75 0 0 1 .91-.545l4 1a.75.75 0 1 1-.365 1.455l-4-1a.75.75 0 0 1-.545-.91m.909-4.545a.75.75 0 1 0-.364 1.455l4 1a.75.75 0 0 0 .364-1.455z"/></svg></a><a class="nav-item" title="探索" href="/explore/" style="color:#FA6400"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M20 12a8 8 0 1 1-16 0a8 8 0 0 1 16 0" opacity=".5"/><path fill="currentColor" d="M17.712 5.453c1.047-.193 2.006-.259 2.797-.152c.77.103 1.536.393 1.956 1.064c.446.714.312 1.542-.012 2.258c-.33.728-.918 1.499-1.672 2.268c-1.516 1.547-3.836 3.226-6.597 4.697c-2.763 1.472-5.495 2.484-7.694 2.92c-1.095.217-2.098.299-2.923.201c-.8-.095-1.6-.383-2.032-1.075c-.47-.752-.296-1.63.07-2.379c.375-.768 1.032-1.586 1.872-2.403L4 12.416c0 .219.083.71.168 1.146c.045.23.09.444.123.596c-.652.666-1.098 1.263-1.339 1.756c-.277.567-.208.825-.145.925c.072.116.305.305.937.38c.609.073 1.44.018 2.455-.183c2.02-.4 4.613-1.351 7.28-2.772c2.667-1.42 4.85-3.015 6.23-4.423c.694-.707 1.15-1.334 1.377-1.836c.233-.515.167-.75.107-.844c-.07-.112-.289-.294-.883-.374c-.542-.072-1.272-.041-2.163.112L16.87 5.656c.338-.101.658-.17.842-.203"/></svg></a><a class="nav-item" title="社交" href="/friends/" style="color:#F44336"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="m13.629 20.472l-.542.916c-.483.816-1.69.816-2.174 0l-.542-.916c-.42-.71-.63-1.066-.968-1.262c-.338-.197-.763-.204-1.613-.219c-1.256-.021-2.043-.098-2.703-.372a5 5 0 0 1-2.706-2.706C2 14.995 2 13.83 2 11.5v-1c0-3.273 0-4.91.737-6.112a5 5 0 0 1 1.65-1.651C5.59 2 7.228 2 10.5 2h3c3.273 0 4.91 0 6.113.737a5 5 0 0 1 1.65 1.65C22 5.59 22 7.228 22 10.5v1c0 2.33 0 3.495-.38 4.413a5 5 0 0 1-2.707 2.706c-.66.274-1.447.35-2.703.372c-.85.015-1.275.022-1.613.219c-.338.196-.548.551-.968 1.262" opacity=".5"/><path fill="currentColor" d="M10.99 14.308c-1.327-.978-3.49-2.84-3.49-4.593c0-2.677 2.475-3.677 4.5-1.609c2.025-2.068 4.5-1.068 4.5 1.609c0 1.752-2.163 3.615-3.49 4.593c-.454.335-.681.502-1.01.502c-.329 0-.556-.167-1.01-.502"/></svg></a></nav>
+</div>
+<div class="widgets">
+
+
+<widget class="widget-wrapper post-list"><div class="widget-header dis-select"><span class="name">最近更新</span></div><div class="widget-body fs14"><a class="item title" href="/2025/04/13/%E2%80%9CDomain%20adaptive%20noise%20reduction%20with%20iterative%20knowledge%20transfer%20and%20style%20generalization%20learning%E2%80%9D%20(Tang%20%E7%AD%89,%202024,%20p.%20/"><span class="title">Domain adaptive noise reduction with iterative knowledge transfer and style generalization learning 论文阅读</span></a><a class="item title" href="/2025/04/09/%E6%9C%AC%E7%A7%91%E6%AF%95%E8%AE%BE/"><span class="title">毕业设计</span></a><a class="item title" href="/2025/04/09/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"><span class="title">UDA 论文阅读</span></a><a class="item title" href="/2024/11/13/AIGC%E6%96%87%E6%9C%AC%E5%A4%9A%E6%AF%94%E7%89%B9%E6%B0%B4%E5%8D%B0%E7%B3%BB%E7%BB%9F/"><span class="title">AIGC文本多比特水印系统使用手册</span></a><a class="item title" href="/2025/04/10/%E5%8F%A4%E8%AF%97/"><span class="title">古诗</span></a></div></widget>
+</div>
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/assets/placeholder/social/08a41b181ce68.svg"/></a><a class="social" href="https://" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/assets/placeholder/social/3845874.svg"/></a><a class="social" href="https://" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/assets/placeholder/social/3616429.svg"/></a><a class="social" href="https://" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/assets/placeholder/social/942ebbf1a4b91.svg"/></a></div></footer>
+</div></aside><div class="l_main" id="main">
+
+
+
+
+
+<div class="article banner top">
+  <div class="content">
+    <div class="top bread-nav footnote"><div class="left"><div class="flex-row" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
+<span class="sep"></span><a class="cap breadcrumb" href="/">文章</a></div>
+<div class="flex-row" id="post-meta"><span class="text created">发布于：<time datetime="2025-04-08T16:00:00.000Z">2025-04-09</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2025-04-10T08:58:54.000Z">2025-04-10</time></span></div></div></div>
+    
+    <div class="bottom only-title">
+      
+      <div class="text-area">
+        <h1 class="text title"><span>UDA 论文阅读</span></h1>
+        
+      </div>
+    </div>
+    
+  </div>
+  </div><article class="md-text content"><h1 id="Unsupervised-domain-adaptation-Related-work"><a href="#Unsupervised-domain-adaptation-Related-work" class="headerlink" title="Unsupervised domain adaptation Related work"></a><strong>Unsupervised domain adaptation Related work</strong></h1><h2 id="CT-MRI-MRI-CT-dataset"><a href="#CT-MRI-MRI-CT-dataset" class="headerlink" title="CT-&gt;MRI&amp;MRI-&gt;CT dataset"></a>CT-&gt;MRI&amp;MRI-&gt;CT dataset</h2><p>MMWHS：<a target="_blank" rel="noopener" href="https://zmiclab.github.io/zxh/0/mmwhs/data.html">Multi-Modality Whole Heart Segmentation 2017</a></p>
+<p>CHAOS：MICCAI 2017</p>
+<p>可能参考的论文不够多</p>
+<h2 id="任务："><a href="#任务：" class="headerlink" title="任务："></a>任务：</h2><ul>
+<li>医学图像通常来自不同的中心、使用不同参数的不同扫描仪或不同的成像模式，这导致了它们之间存在领域偏移。这种领域偏移常常会导致模型性能严重下降。UDA任务大多是这个任务背景。</li>
+<li>解决在医学图像分割中，由于稀有病症图像样本极其稀少，导致深度模型难以有效泛化的问题。FSDA任务。</li>
+<li>LDCT相关的DA问题，在医学图像分割任务中，LDCT图像的低质量、噪声和不同的扫描条件增加了领域间的差异。</li>
+</ul>
+<h2 id="工作一"><a href="#工作一" class="headerlink" title="工作一"></a>工作一</h2><p>论文：</p>
+<p>Dual domain distribution disruption with semantics preservation: Unsupervised domain adaptation for medical image segmentation. MIA 2024</p>
+<p>链接：<a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/abs/pii/S1361841524002007?via=ihub">Dual domain distribution disruption with semantics preservation: Unsupervised domain adaptation for medical image segmentation - ScienceDirect</a></p>
+<p>代码：<a target="_blank" rel="noopener" href="https://github.com/MIXAILAB/DDSPSeg">https://github.com/MIXAILAB/DDSPSeg</a></p>
+<h3 id="任务"><a href="#任务" class="headerlink" title="任务"></a>任务</h3><p>待审核论文对比的baseline，针对传统的UDA方法利用GAN网络进行域转换导致转换后的图像出现分割错误的问题，采用语义约束和跨通道对齐源域和目标域之前的特征，实现在三个公开数据集上优于当时最先进的UDA方法。</p>
+<h3 id="数据集"><a href="#数据集" class="headerlink" title="数据集"></a>数据集</h3><ul>
+<li>MMWHS17  心脏分割</li>
+<li>BraTS18 脑肿瘤分割</li>
+<li>PROMISE12 challenge dataset 前列腺分割</li>
+</ul>
+<h2 id="工作二"><a href="#工作二" class="headerlink" title="工作二"></a>工作二</h2><p>论文：Style mixup enhanced disentanglement learning for unsupervised domain adaptation in medical image segmentation.MIA2025</p>
+<p>链接：<a target="_blank" rel="noopener" href="https://pdf.sciencedirectassets.com/272154/1-s2.0-S1361841524X00092/1-s2.0-S1361841524003657/main.pdf?X-Amz-Security-Token=IQoJb3JpZ2luX2VjEFsaCXVzLWVhc3QtMSJIMEYCIQC37FlkIjAD/m+dCL4DJVw0g+LmR5YUs0mXiGmsuyXOpQIhAI1GWkQXB1pBrQaLbNjHWFnSQAdao7v8oFK0xBOGRRzDKrsFCMT//////////wEQBRoMMDU5MDAzNTQ2ODY1Igx1pN9StjuY4C1ocyUqjwXkQnUAI//9fVdGoz30/A8QVt1em5vyl55p6FqPa4a4oVqklhUkI0AZzhVZYgWpEWGtlPL+hLNwx+r80BegVB6yFIojgtEZrGXKzz7NyZKL//kOeguu3sna9lsX4QRbjz9gnFUlwke6LvRnuWBK/IMQ+cm1M41+BCBVMat3UbaemRWvOYB5ExUbG05kggzokIz0YdNAOo2Wy+r51hyLOa+YfZS0qKBZsqj1qohMpTut7POyw26a8HA+LEu2lHdPHNbkKec0OVWeDRQefMt65TXeOX2UXm1x4M2MfNpWigqXlmbWNxS1DuLu7dxPJDNA5q/4yVgvciV/LHUmcqUFHIUqosLS7IlSHfRyHddP1FIm+mUk6k9KE9eCuJQhgQdepMvOH/fzKlUSHy2QI726gc/6PiiwhgKthfD2iwejznFsDCTG1guDXov+1PL3E2cdRrTudCDnbKoA7VeyXYNIEJUeba/ROXOlljNoev8wtv/m+jVtNGGo4/O1ib9X3NYlTtj/kYwT2me7AT1/S/Aj4xZRhA6JTgHn1hz9wdhlVVHJ4AMasP4lE/zbp7yeG5V37menCY8Y2dAQvW0iQ4urtnjb10RoEr6G9tL+6kY52XnHUvQkjoyTqet5b6xvdTGSCvfR8HmihHJNrfh+RrvDJFK1VGsGSBtmwsXXIB6sNbkzLyhNjRORQx+VzFHPzqgcL4rhWFYTC8uUp9wBgiFzn+SRjqv9CSMZc70wt+riSmwxA1bj08LNwTkxet8WNdPVmDizC3XDpr8VG4vk0iawCmJMSUsCbsEfhvK40V3yT5PTCzpA2P2Ynf0f406Cjml3AOY/7fa+N56CXhvdCFyxqb4kXT2tphrdYAGk6YjaOObHMOXdsL8GOrABu2EX3YAUdjbvea2Co5DeAJird4qq7DIJcYpBNliOoXcA1Jgiqy+ytFWnGERy/7kVZpbm+QZMmMJUltfqMq1pM+9PLVxR686qQi1aKYbVKKse3sqegrYfUpAgUBZnvewUTtnf20KkdghHkVCDKJxxotRuQTipc4Tb7O/XFkx/+bFnvCAFNql+Rf/87vWpb2QFEoFMFKFXqON+vUJVuimjpyDsmOjhl8D2Yo037YlfZGM=&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20250401T193813Z&X-Amz-SignedHeaders=host&X-Amz-Expires=300&X-Amz-Credential=ASIAQ3PHCVTY634WWKIF/20250401/us-east-1/s3/aws4_request&X-Amz-Signature=72773f3a0cd35a75e6fbe6ab99400be349a87b27a84b8b1f98c3a4e8d5e44818&hash=3c5f5277c728cbf771215ee2086d8fe519266e01525f83759b294158d9fb4cee&host=68042c943591013ac2b2430a89b270f6af2c76d8dfd086a07176afe7c76c2c61&pii=S1361841524003657&tid=spdf-45e078e6-8c35-4437-a161-515dd1df002d&sid=162b01d451ff73490e18f387668bbeab99b1gxrqa&type=client&tsoh=d3d3LnNjaWVuY2VkaXJlY3QuY29t&rh=d3d3LnNjaWVuY2VkaXJlY3QuY29t&ua=0e11575558015e040f5555&rr=929a8ba56ceea36d&cc=tw">Style mixup enhanced disentanglement learning for unsupervised domain adaptation in medical image segmentation</a></p>
+<h3 id="任务-1"><a href="#任务-1" class="headerlink" title="任务"></a>任务</h3><p>本论文研究的是在<strong>医学图像分割任务中</strong>的UDA<strong>在</strong>跨模态数据之间由于风格差异造成的Domain Shift问题，其采用 Disentanglement learning和style mixup等构建了SMEDL的框架，提升对语义不变特征的学习能力，通过定性和定量实验证明了其方法在UDA 医学图像分割方面的有效性。</p>
+<h3 id="数据集-1"><a href="#数据集-1" class="headerlink" title="数据集"></a>数据集</h3><ul>
+<li><p><strong>MM-WHS</strong></p>
+<ul>
+<li>包含 20 个 MRI 和 20 个 CT 心脏图像；</li>
+<li>分割目标为心脏的四个结构：升主动脉（AA）、左心房腔（LAC）、左心室腔（LVC）和左心室心肌（MYO）；</li>
+<li>实验包括 MRI → CT 和 CT → MRI 的双向迁移。</li>
+</ul>
+</li>
+<li><p><strong>MS-CMRSeg</strong></p>
+</li>
+<li><p>包含三种 CMR 序列：bSSFP、LGE 和 T2；</p>
+</li>
+<li><p>使用 bSSFP 为源域，LGE 为目标域；</p>
+</li>
+<li><p>分割目标为：右心室、左心室和心肌。</p>
+</li>
+<li><p><strong>BraTS18</strong></p>
+</li>
+<li><p>包含高等级胶质瘤和低等级胶质瘤病人的多模态 MRI 图像；</p>
+</li>
+<li><p>使用 HGG 作为源域，LGG 作为目标域；</p>
+</li>
+<li><p>分割目标为：整个肿瘤区域。</p>
+</li>
+</ul>
+<h2 id="工作三"><a href="#工作三" class="headerlink" title="工作三"></a>工作三</h2><p>论文：Style adaptation for avoiding semantic inconsistency in Unsupervised Domain Adaptation medical image segmentation.MIA 2025</p>
+<p>链接：<a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S1746809425000849">Style adaptation for avoiding semantic inconsistency in Unsupervised Domain Adaptation medical image segmentation - ScienceDirect</a></p>
+<h3 id="任务场景"><a href="#任务场景" class="headerlink" title="任务场景"></a>任务场景</h3><p>主要解决的问题是，在不同医学影像设备或采集中心导致的数据分布差异下，如何通过风格对齐而不是语义对齐来实现有效的跨域图像分割。该方法将域对齐问题转换为风格对齐问题，以避免语义信息在对齐过程中的混淆和破坏。</p>
+<h3 id="数据集-2"><a href="#数据集-2" class="headerlink" title="数据集"></a>数据集</h3><ul>
+<li><strong>MM-WHS</strong> ：用于多个模态下心脏结构的分割。</li>
+<li>腹部多器官分割数据集<ul>
+<li><strong>MRI 数据</strong>来自 ISBI 2019 CHAOS 竞赛，包含 20 个 T2-SPIR MRI 三维图像；</li>
+<li><strong>CT 数据</strong>来自公开的腹部 CT 数据集，包含 30 个三维图像。</li>
+<li>分割目标包括：脾脏、肝脏、左肾、右肾。</li>
+</ul>
+</li>
+</ul>
+<h2 id="工作四"><a href="#工作四" class="headerlink" title="工作四"></a>工作四</h2><p>论文:Unsupervised domain adaptation with multi-level distillation boost and adaptive mask for medical image segmentation.MIA 2025</p>
+<p>链接：</p>
+<h3 id="任务场景-1"><a href="#任务场景-1" class="headerlink" title="任务场景"></a>任务场景</h3><p>本工作关注如何处理不同医学图像来源或设备之间的差异。通过改进Mean-Teacher框架，通过引入多层次蒸馏增强和自适应掩膜策略来提升模型的泛化能力和适应性，从而改善了医学图像中的目标区域分割效果。</p>
+<h3 id="数据集-3"><a href="#数据集-3" class="headerlink" title="数据集"></a>数据集</h3><ul>
+<li><strong>Fundus 数据集 眼底图片</strong><ul>
+<li><strong>REFUGE</strong></li>
+<li><strong>RIM-ONE-r3</strong></li>
+<li><strong>Drishti-GS</strong></li>
+<li><strong>RIGA+</strong></li>
+</ul>
+</li>
+<li><strong>Polyp 数据集 息肉图片</strong></li>
+<li><strong>CVC-EndoSceneStill</strong></li>
+<li><strong>CVC-ColonDB</strong></li>
+<li><strong>ETIS-LARIB</strong></li>
+<li><strong>Kvasir</strong></li>
+</ul>
+<h2 id="工作五"><a href="#工作五" class="headerlink" title="工作五"></a>工作五</h2><p>论文：O2M-UDA: Unsupervised dynamic domain adaptation for one-to-multiple medical image segmentation.MIA 2023</p>
+<p>链接：<a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S0950705123001284">O2M-UDA: Unsupervised dynamic domain adaptation for one-to-multiple medical image segmentation - ScienceDirect</a></p>
+<h3 id="任务场景-2"><a href="#任务场景-2" class="headerlink" title="任务场景"></a>任务场景</h3><p>该方法通过无监督域自适应<strong>技术应对由不同扫描设备、扫描参数等引起的领域间分布差异，以解决传统方法无法有效应对多领域目标数据的问题。</strong></p>
+<h3 id="数据集-4"><a href="#数据集-4" class="headerlink" title="数据集"></a>数据集</h3><p><strong>JSPH → KiTS19</strong></p>
+<ul>
+<li><strong>JSPH（江苏人民医院）</strong> ：一个腹部CT图像数据集，用于肾脏和肿瘤的分割任务，图像采集于同一医院。</li>
+<li><strong>KiTS19</strong> ：来自多个医疗中心的CT图像数据集，涵盖不同的扫描阶段，任务是肾脏和肿瘤的分割。</li>
+</ul>
+<p><strong>ACDC → MyoEmidec</strong></p>
+<ul>
+<li><strong>ACDC</strong> ：包含100个患者的心脏磁共振图像，任务是右心室、左心室和心肌的分割。</li>
+<li><strong>MyoEmidec</strong> ：包括来自MyoPS2020和EMIDEC的数据集，涉及不同的心脏病变类型，图像采集阶段包括正常MRI和病理性MRI。</li>
+</ul>
+<p>一些记录</p>
+<ul>
+<li>计算复杂度，采用了傅里叶变换和频率风格混合进行数据增强，计算复杂度或许会很高，不知道计算复杂度在这个UDA医学图像方面是否有较大的需求。</li>
+<li>确实缺少了特定任务的数据集，因为只包含心脏的数据集，从CRI和CT成对的数据集确实稀少，目前的UDA工作大多BraTS18 脑肿瘤分割和MMWHS17心脏分割，后者是待审核论文使用的。</li>
+<li>参考MIA2024的文献，UDA方向的相关论文比较少（时间有限只去找了看了MIA的）</li>
+<li>消融实验</li>
+</ul>
+<h2 id="工作六"><a href="#工作六" class="headerlink" title="工作六"></a>工作六</h2><p>论文：DDA-Net: Unsupervised cross-modality medical image segmentation via dual domain adaptation.MIA 2022</p>
+<p>链接：<a target="_blank" rel="noopener" href="https://pdf.sciencedirectassets.com/271322/1-s2.0-S0169260721X00168/1-s2.0-S0169260721006052/main.pdf?X-Amz-Security-Token=IQoJb3JpZ2luX2VjEF0aCXVzLWVhc3QtMSJHMEUCIQCRbI74LKGp3/47vU41qCuUpS3QYg8zELylbExIBSO74gIgWbGnZUCu/V+zT61xpnpjxMpzwwazwU59EdSXioX2ab4qvAUIxv//////////ARAFGgwwNTkwMDM1NDY4NjUiDCbMXug6XCJgWc9yKyqQBRdSXJgR3NrWD3g35/67FEjkQPP2CPT07O5pJcm9+Um3sKzzGvAaUA4xRa6w2kggo+8fnNEyD7n8t+1ueIuJNf/hx4C+J7qsqvxD+l1zsnj+AP3mJ0/BtJp9z31xJrcRWjg1aR2a8NhR0Gb4yDg7H7fMLQL6QfVQbOfPFm6+Kxi7AaL8da2khchv7DiQS3ul+jTzTBZQ1p3Lm3xzWHxOrd4CqlPw6TSvfrknkEMHaOPxEsx08Z6Ll0PVlmS8bMdv6/O+kZi05VM9gG2rreg422hrEON+zcTuHqFCBaUTJnmd027IujHngDtxlM5dmlpGzcN0rVQbL2TDhUjHnvoa2vtrHj+fifT/7ZUXAzYB+1iUdSUt7DRZX2luwlkq67tE2VCcJlWSLpYM5N0n+K4HTNOaeteJBk0Chmy7pINTBuPRP4eW2lDRPTcRwSRHUPzyxvOaoyoivQl4xk3cp6Qxnp51iotsg2+f2Tpc31ibpSXC39w33mOqAgaeRaG6fJs3rJ2CGC41kLG/IKpK0+75l904wQj3SFFzHUClYd/lkP53ntpPO2J/iWgmeMW0cnBrnk4+SRsenv2pzLk+onEzrv2QsIpWfkXmEj1vVAK80JAMBKfAvoz4FdeJJPDJDb/utFcK8u1+RrJvxY6QxS8HqRw0pkLjFi8Iao4kAIBar9NS3pFhXVCua2kZ5QSQ6HQbIQzYx2K3rKcc3XzCj4EGUvE90Lcy6YkVpiFhXnDksg9zuJH8CCpYXs/Mb+JCfTjrN1opJeoWdcnN277RXk25Z1+JzTissz+ykHVzArlptbuUMYZ2yclz8GWKLc/zeK4ULeH2h9hLBb9DUo5VaxO/O9lkh61tP5BHmJushtEY74ukMO+Zsb8GOrEBKySpB7WALH580cptw0V6RUBDr18oa/cmO2THcVDS2u8fnBLnrrA+c1BgPsrhdqQL65mxVbxQw4SUxvyOqAhVSc3SK8XbnslTIhiojXzZlqjFsYuMuQL9XIy+hvjFVC2BR3tkew7aCIrGblLKcMwAMELtt7RM7Qa6mDENbwS39iIyXuH7hyW3kJCc0bZN0+7GFYpMbK86vXJhO3bKj6LO2xl2uduhfevWhwRvKmqbNvPZ&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20250401T215812Z&X-Amz-SignedHeaders=host&X-Amz-Expires=300&X-Amz-Credential=ASIAQ3PHCVTY27U7KEMJ/20250401/us-east-1/s3/aws4_request&X-Amz-Signature=bae8fb1c0ed3b25bb0bafcf55be770118700dcdc8cc1c0f313a2e57eec51a99a&hash=12689a928a417c0517fcabddffa4b52e588c93e79b88e0ec77fd16adb18c99f5&host=68042c943591013ac2b2430a89b270f6af2c76d8dfd086a07176afe7c76c2c61&pii=S0169260721006052&tid=spdf-88b10e8a-ed0f-4597-8454-db09fddc69ed&sid=162b01d451ff73490e18f387668bbeab99b1gxrqa&type=client&tsoh=d3d3LnNjaWVuY2VkaXJlY3QuY29t&rh=d3d3LnNjaWVuY2VkaXJlY3QuY29t&ua=090157555802535e0c5552&rr=929b58b5186dfd2b&cc=sg">DDA-Net: Unsupervised cross-modality medical image segmentation via dual domain adaptation</a></p>
+<h3 id="任务场景-3"><a href="#任务场景-3" class="headerlink" title="任务场景"></a>任务场景</h3><p>本论文通过<strong>双领域自适应</strong>来应对医学图像中不同模态之间的领域偏移问题。通过使用<strong>跨模态自动编码器</strong>和 <strong>对抗学习</strong> ，DDA-Net能够将源领域和目标领域的图像映射到共享的特征空间中，从而实现跨模态的图像分割，而无需目标领域的标注数据。</p>
+<h3 id="数据集-5"><a href="#数据集-5" class="headerlink" title="数据集"></a>数据集</h3><ul>
+<li><strong>MRBrainS18 数据集</strong><ul>
+<li>该数据集包含7组脑部MRI图像，每组图像包括T1、T1-IR和T2-FLAIR三种不同的脉冲序列。</li>
+<li><strong>任务</strong> ：从T1图像到T1-IR和T2-FLAIR图像的跨模态图像分割。</li>
+</ul>
+</li>
+<li><strong>MM-WHS17 数据集</strong></li>
+</ul>
+<h1 id="Few-Shot-Domain-adaptation-Related-work"><a href="#Few-Shot-Domain-adaptation-Related-work" class="headerlink" title="Few-Shot Domain adaptation Related work"></a><strong>Few-Shot Domain adaptation Related work</strong></h1><h2 id="工作一-1"><a href="#工作一-1" class="headerlink" title="工作一"></a>工作一</h2><p>论文：PFMNet: Prototype-based feature mapping network for few-shot domain adaptation in medical image segmentation.MIA 2024</p>
+<p>链接：<a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S0895611124000831">PFMNet: Prototype-based feature mapping network for few-shot domain adaptation in medical image segmentation - ScienceDirect</a></p>
+<h3 id="任务场景-4"><a href="#任务场景-4" class="headerlink" title="任务场景"></a>任务场景</h3><p>本论文聚焦于 <strong>Few-Shot Domain Adaptation</strong> ，目标是解决在医学图像分割中，由于稀有病症图像样本极其稀少，导致深度模型难以有效泛化的问题。</p>
+<p>为此，论文提出了一种新颖的原型驱动特征映射网络，该网络：</p>
+<ul>
+<li>在编码器与解码器之间引入原型特征映射模块；</li>
+<li>将目标域的高阶特征映射为源域风格的特征，使得解码器能更有效地理解并生成准确的分割结果；</li>
+<li>能在<strong>仅使用5~20张标注图像的少量目标域样本条件下</strong>实现精确的图像分割。</li>
+</ul>
+<h3 id="数据集-6"><a href="#数据集-6" class="headerlink" title="数据集"></a>数据集</h3><p>REFUGE Challenge 数据集</p>
+<p>Kvasir</p>
+
+<div class="article-footer fs14">
+    <section id="license">
+      <div class="header"><span>许可协议</span></div>
+      <div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div>
+    </section>
+    </div>
+</article>
+<div class="related-wrap" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2025/04/09/%E6%9C%AC%E7%A7%91%E6%AF%95%E8%AE%BE/">毕业设计</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2025/03/31/post-name/">古诗</a></div></section></div>
+
+<div class="related-wrap" id="related-posts">
+    <section class='header'>
+      <div class='title cap theme'>您可能感兴趣的文章</div>
+    </section>
+    <section class='body'>
+    <div class="related-posts"><a class="item" href="/2024/11/13/AIGC文本多比特水印系统/" title="AIGC文本多比特水印系统使用手册"><span class="title">AIGC文本多比特水印系统使用手册</span></a></div></section></div>
+
+
+
+
+<footer class="page-footer footnote"><hr><div class="text"><p>本站由 <a href="/">Echo</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.29.1">Stellar 1.29.1</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+<div class="main-mask" onclick="sidebar.dismiss()"></div></div><aside class="l_right">
+<div class="widgets">
+
+
+
+<widget class="widget-wrapper toc" id="data-toc" collapse="false"><div class="widget-header dis-select"><span class="name">本文目录</span><a class="cap-action" onclick="sidebar.toggleTOC()" ><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg></a></div><div class="widget-body"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#CT-MRI-MRI-CT-dataset"><span class="toc-text">CT-&gt;MRI&amp;MRI-&gt;CT dataset</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A1%EF%BC%9A"><span class="toc-text">任务：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B7%A5%E4%BD%9C%E4%B8%80"><span class="toc-text">工作一</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A1"><span class="toc-text">任务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="toc-text">数据集</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B7%A5%E4%BD%9C%E4%BA%8C"><span class="toc-text">工作二</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A1-1"><span class="toc-text">任务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86-1"><span class="toc-text">数据集</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B7%A5%E4%BD%9C%E4%B8%89"><span class="toc-text">工作三</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A1%E5%9C%BA%E6%99%AF"><span class="toc-text">任务场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86-2"><span class="toc-text">数据集</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B7%A5%E4%BD%9C%E5%9B%9B"><span class="toc-text">工作四</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A1%E5%9C%BA%E6%99%AF-1"><span class="toc-text">任务场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86-3"><span class="toc-text">数据集</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B7%A5%E4%BD%9C%E4%BA%94"><span class="toc-text">工作五</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A1%E5%9C%BA%E6%99%AF-2"><span class="toc-text">任务场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86-4"><span class="toc-text">数据集</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B7%A5%E4%BD%9C%E5%85%AD"><span class="toc-text">工作六</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A1%E5%9C%BA%E6%99%AF-3"><span class="toc-text">任务场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86-5"><span class="toc-text">数据集</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B7%A5%E4%BD%9C%E4%B8%80-1"><span class="toc-text">工作一</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A1%E5%9C%BA%E6%99%AF-4"><span class="toc-text">任务场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86-6"><span class="toc-text">数据集</span></a></li></ol></li></ol></div><div class="widget-footer">
+
+<a class="top" onclick="util.scrollTop()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12c0-4.714 0-7.071 1.464-8.536C4.93 2 7.286 2 12 2c4.714 0 7.071 0 8.535 1.464C22 4.93 22 7.286 22 12c0 4.714 0 7.071-1.465 8.535C19.072 22 16.714 22 12 22s-7.071 0-8.536-1.465C2 19.072 2 16.714 2 12Z"/><path stroke-linecap="round" stroke-linejoin="round" d="m9 15.5l3-3l3 3m-6-4l3-3l3 3"/></g></svg><span>回到顶部</span></a></div></widget>
+</div></aside><div class='float-panel blur'>
+  <button type='button' style='display:none' class='laptop-only rightbar-toggle mobile' onclick='sidebar.rightbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
+  </button>
+  <button type='button' style='display:none' class='mobile-only leftbar-toggle mobile' onclick='sidebar.leftbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 11c0-3.771 0-5.657 1.172-6.828C4.343 3 6.229 3 10 3h4c3.771 0 5.657 0 6.828 1.172C22 5.343 22 7.229 22 11v2c0 3.771 0 5.657-1.172 6.828C19.657 21 17.771 21 14 21h-4c-3.771 0-5.657 0-6.828-1.172C2 18.657 2 16.771 2 13z"/><path id="sep" stroke-linecap="round" d="M5.5 10h6m-5 4h4m4.5 7V3"/></g></svg>
+  </button>
+</div>
+</div><div class="scripts">
+<script type="text/javascript">
+  const ctx = {
+    date_suffix: {
+      just: `刚刚`,
+      min: `分钟前`,
+      hour: `小时前`,
+      day: `天前`,
+    },
+    root : `/`,
+  };
+
+  // required plugins (only load if needs)
+  if (`local_search`) {
+    ctx.search = {};
+    ctx.search.service = `local_search`;
+    if (ctx.search.service == 'local_search') {
+      let service_obj = Object.assign({}, `{"field":"all","path":"/search.json","content":true,"sort":"-date"}`);
+      ctx.search[ctx.search.service] = service_obj;
+    }
+  }
+  const def = {
+    avatar: `https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/avatar/round/3442075.svg`,
+    cover: `https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/cover/76b86c0226ffd.svg`,
+  };
+  const deps = {
+    jquery: `https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js`,
+    marked: `https://cdn.jsdelivr.net/npm/marked@13.0.1/lib/marked.umd.min.js`
+  }
+  
+
+</script>
+
+<script type="text/javascript">
+  const utils = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    css: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    js: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')){
+        src = ctx.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    jq: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        utils.js(deps.jquery).then(fn)
+      } else {
+        fn()
+      }
+    },
+    
+    onLoading: (el) => {
+      if (el) {
+        $(el).append('<div class="loading-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" stroke-opacity=".3" d="M12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="1.3s" values="60;0"/></path><path stroke-dasharray="15" stroke-dashoffset="15" d="M12 3C16.9706 3 21 7.02944 21 12"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.3s" values="15;0"/><animateTransform attributeName="transform" dur="1.5s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12"/></path></g></svg></div>');
+      }
+    },
+    onLoadSuccess: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap').remove();
+      }
+    },
+    onLoadFailure: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap svg').remove();
+        $(el).find('.loading-wrap').append('<svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" d="M12 3L21 20H3L12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="60;0"/></path><path stroke-dasharray="6" stroke-dashoffset="6" d="M12 10V14"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.6s" dur="0.2s" values="6;0"/></path></g><circle cx="12" cy="17" r="1" fill="currentColor" fill-opacity="0"><animate fill="freeze" attributeName="fill-opacity" begin="0.8s" dur="0.4s" values="0;1"/></circle></svg>');
+        $(el).find('.loading-wrap').addClass('error');
+      }
+    },
+    request: (el, url, callback, onFailure) => {
+      let retryTimes = 3;
+      utils.onLoading(el);
+      function req() {
+        return new Promise((resolve, reject) => {
+          let status = 0; // 0 等待 1 完成 2 超时
+          let timer = setTimeout(() => {
+            if (status === 0) {
+              status = 2;
+              timer = null;
+              reject('请求超时');
+              if (retryTimes == 0) {
+                onFailure();
+              }
+            }
+          }, 5000);
+          fetch(url).then(function(response) {
+            if (status !== 2) {
+              clearTimeout(timer);
+              resolve(response);
+              timer = null;
+              status = 1;
+            }
+            if (response.ok) {
+              return response.json();
+            }
+            throw new Error('Network response was not ok.');
+          }).then(function(data) {
+            retryTimes = 0;
+            utils.onLoadSuccess(el);
+            callback(data);
+          }).catch(function(error) {
+            if (retryTimes > 0) {
+              retryTimes -= 1;
+              setTimeout(() => {
+                req();
+              }, 5000);
+            } else {
+              utils.onLoadFailure(el);
+              onFailure();
+            }
+          });
+        });
+      }
+      req();
+    },
+  };
+</script>
+
+<script>
+  const sidebar = {
+    leftbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    rightbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('rightbar');
+        l_body.removeAttribute('leftbar');
+      }
+    },
+    dismiss: () => {
+      if (l_body) {
+        l_body.removeAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    toggleTOC: () => {
+      document.querySelector('#data-toc').classList.toggle('collapse');
+    }
+  }
+</script>
+<script type="text/javascript">
+  (() => {
+    const tagSwitchers = document.querySelectorAll('.tag-subtree.parent-tag > a > .tag-switcher-wrapper')
+    for (const tagSwitcher of tagSwitchers) {
+      tagSwitcher.addEventListener('click', (e) => {
+        const parent = e.target.closest('.tag-subtree.parent-tag')
+        parent.classList.toggle('expanded')
+        e.preventDefault()
+      })
+    }
+
+    // Get active tag from query string, then activate it.
+    const urlParams = new URLSearchParams(window.location.search)
+    const activeTag = urlParams.get('tag')
+    if (activeTag) {
+      let tag = document.querySelector(`.tag-subtree[data-tag="${activeTag}"]`)
+      if (tag) {
+        tag.querySelector('a').classList.add('active')
+        
+        while (tag) {
+          tag.classList.add('expanded')
+          tag = tag.parentElement.closest('.tag-subtree.parent-tag')
+        }
+      }
+    }
+  })()
+</script>
+
+
+<!-- required -->
+<script src="/js/main.js?v=1.29.1" defer></script>
+
+<script type="text/javascript">
+  const applyTheme = (theme) => {
+    if (theme === 'auto') {
+      document.documentElement.removeAttribute('data-theme')
+    } else {
+      document.documentElement.setAttribute('data-theme', theme)
+    }
+
+    applyThemeToGiscus(theme)
+  }
+
+  const applyThemeToGiscus = (theme) => {
+    theme = theme === 'auto' ? 'preferred_color_scheme' : theme
+
+    const cmt = document.getElementById('giscus')
+    if (cmt) {
+      // This works before giscus load.
+      cmt.setAttribute('data-theme', theme)
+    }
+
+    const iframe = document.querySelector('#comments > section.giscus > iframe')
+    if (iframe) {
+      // This works after giscus loaded.
+      const src = iframe.src
+      const newSrc = src.replace(/theme=[\w]+/, `theme=${theme}`)
+      iframe.src = newSrc
+    }
+  }
+
+  const switchTheme = () => {
+    // light -> dark -> auto -> light -> ...
+    const currentTheme = document.documentElement.getAttribute('data-theme')
+    let newTheme;
+    switch (currentTheme) {
+      case 'light':
+        newTheme = 'dark'
+        break
+      case 'dark':
+        newTheme = 'auto'
+        break
+      default:
+        newTheme = 'light'
+    }
+    applyTheme(newTheme)
+    window.localStorage.setItem('Stellar.theme', newTheme)
+
+    const messages = {
+      light: `切换到浅色模式`,
+      dark: `切换到深色模式`,
+      auto: `切换到跟随系统配色`,
+    }
+    hud?.toast?.(messages[newTheme])
+  }
+
+  (() => {
+    // Apply user's preferred theme, if any.
+    const theme = window.localStorage.getItem('Stellar.theme')
+    if (theme !== null) {
+      applyTheme(theme)
+    }
+  })()
+</script>
+
+
+<!-- optional -->
+
+
+
+<script defer>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.services = Object.assign({}, JSON.parse(`{"mdrender":{"js":"/js/services/mdrender.js"},"siteinfo":{"js":"/js/services/siteinfo.js","api":null},"ghinfo":{"js":"/js/services/ghinfo.js"},"sites":{"js":"/js/services/sites.js"},"friends":{"js":"/js/services/friends.js"},"timeline":{"js":"/js/services/timeline.js"},"fcircle":{"js":"/js/services/fcircle.js"},"weibo":{"js":"/js/services/weibo.js"},"memos":{"js":"/js/services/memos.js"}}`));
+    for (let id of Object.keys(ctx.services)) {
+      const js = ctx.services[id].js;
+      if (id == 'siteinfo') {
+        ctx.cardlinks = document.querySelectorAll('a.link-card[cardlink]');
+        if (ctx.cardlinks?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            setCardLink(ctx.cardlinks);
+          });
+        }
+      } else {
+        const els = document.getElementsByClassName(`ds-${id}`);
+        if (els?.length > 0) {
+          utils.jq(() => {
+            if (id == 'timeline' || 'memos' || 'marked') {
+              utils.js(deps.marked).then(function () {
+                utils.js(js, { defer: true });
+              });
+            } else {
+              utils.js(js, { defer: true });
+            }
+          });
+        }
+      }
+    }
+  });
+</script>
+
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.search = {
+      path: `/search.json`,
+    }
+    utils.js('/js/search/local-search.js', { defer: true });
+  });
+</script><script>
+  window.FPConfig = {
+    delay: 0,
+    ignoreKeywords: [],
+    maxRPS: 5,
+    hoverDelay: 25
+  };
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/flying-pages@2/flying-pages.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@19.1.3/dist/lazyload.min.js"></script>
+<script>
+  // https://www.npmjs.com/package/vanilla-lazyload
+  // Set the options globally
+  // to make LazyLoad self-initialize
+  window.lazyLoadOptions = {
+    elements_selector: ".lazy",
+  };
+  // Listen to the initialization event
+  // and get the instance of LazyLoad
+  window.addEventListener(
+    "LazyLoad::Initialized",
+    function (event) {
+      window.lazyLoadInstance = event.detail.instance;
+    },
+    false
+  );
+  document.addEventListener('DOMContentLoaded', function () {
+    window.lazyLoadInstance?.update();
+  });
+</script><script>
+  ctx.fancybox = {
+    selector: `.timenode p>img`,
+    css: `https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css`,
+    js: `https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js`
+  };
+  var selector = '[data-fancybox]:not(.error)';
+  if (ctx.fancybox.selector) {
+    selector += `, ${ctx.fancybox.selector}`
+  }
+  var needFancybox = document.querySelectorAll(selector).length !== 0;
+  if (!needFancybox) {
+    const els = document.getElementsByClassName('ds-memos');
+    if (els != undefined && els.length > 0) {
+      needFancybox = true;
+    }
+  }
+  if (needFancybox) {
+    utils.css(ctx.fancybox.css);
+    utils.js(ctx.fancybox.js, { defer: true }).then(function () {
+      Fancybox.bind(selector, {
+        hideScrollbar: false,
+        Thumbs: {
+          autoStart: false,
+        },
+        caption: (fancybox, slide) => {
+          return slide.triggerEl.alt || slide.triggerEl.dataset.caption || null
+        }
+      });
+    })
+  }
+</script>
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    const swiper_api = document.getElementById('swiper-api');
+    if (swiper_api != undefined) {
+      utils.css(`https://unpkg.com/swiper@10.3.1/swiper-bundle.min.css`);
+      utils.js(`https://unpkg.com/swiper@10.3.1/swiper-bundle.min.js`, { defer: true }).then(function () {
+        const effect = swiper_api.getAttribute('effect') || '';
+        var swiper = new Swiper('.swiper#swiper-api', {
+          slidesPerView: 'auto',
+          spaceBetween: 8,
+          centeredSlides: true,
+          effect: effect,
+          rewind: true,
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+          },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+        });
+      })
+    }
+  });
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    window.codeElements = document.querySelectorAll('.code');
+    if (window.codeElements.length > 0) {
+      ctx.copycode = {
+        default_text: `Copy`,
+        success_text: `Copied`,
+        toast: `复制成功`,
+      };
+      utils.js('/js/plugins/copycode.js');
+    }
+  });
+</script>
+
+
+<!-- inject -->
+
+</div></body></html>
