@@ -5,10 +5,31 @@
     <link rel="icon" type="image/svg+xml" href="./vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite + React + TS</title>
+    <style>
+      .back-link {
+        position: fixed;
+        top: 16px;
+        left: 16px;
+        z-index: 9999;
+        padding: 8px 14px;
+        border-radius: 999px;
+        background: rgba(0, 0, 0, 0.55);
+        color: #fff;
+        text-decoration: none;
+        font-family: "MiSans", "Helvetica Neue", Arial, sans-serif;
+        font-size: 14px;
+        letter-spacing: 0.5px;
+        transition: background 0.2s ease;
+      }
+      .back-link:hover {
+        background: rgba(0, 0, 0, 0.75);
+      }
+    </style>
     <script type="module" crossorigin src="./assets/index-DYPgso0z.js"></script>
     <link rel="stylesheet" crossorigin href="./assets/index-DW-aU6Ww.css">
   </head>
   <body>
+    <a class="back-link" href="/explore/">← 返回探索</a>
     <div id="root"></div>
   </body>
 </html>
