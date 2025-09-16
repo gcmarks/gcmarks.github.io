@@ -1,0 +1,31 @@
+<svg width="1200" height="675" viewBox="0 0 1200 675" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1b2a49"/>
+      <stop offset="100%" stop-color="#2f3c72"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,12 L12,6 z" fill="#76BDF2" />
+    </marker>
+  </defs>
+  <rect width="1200" height="675" fill="url(#bg)"/>
+  <rect x="80" y="120" width="1040" height="435" rx="32" fill="rgba(17, 24, 39, 0.7)" stroke="#76BDF2" stroke-width="4"/>
+  <text x="600" y="220" fill="#F8E9A1" font-family="'Segoe UI', 'PingFang SC', sans-serif" font-size="48" text-anchor="middle">
+    Transformer 架构中的 FFN 层
+  </text>
+  <text x="600" y="290" fill="#F8E9A1" font-family="'Segoe UI', 'PingFang SC', sans-serif" font-size="48" text-anchor="middle">
+    替换为稀疏 MoE 层
+  </text>
+  <g fill="#7fd1b9" font-family="'Segoe UI', 'PingFang SC', sans-serif" font-size="28" text-anchor="middle">
+    <text x="300" y="420">输入 Token</text>
+    <text x="600" y="420">路由器 (Gating)</text>
+    <text x="900" y="420">Top-K Experts (FFN)</text>
+  </g>
+  <g stroke="#76BDF2" stroke-width="8" stroke-linecap="round">
+    <line x1="300" y1="450" x2="560" y2="450" marker-end="url(#arrow)"/>
+    <line x1="640" y1="450" x2="880" y2="450" marker-end="url(#arrow)"/>
+  </g>
+  <text x="600" y="520" fill="#9fd5ff" font-family="'Segoe UI', 'PingFang SC', sans-serif" font-size="28" text-anchor="middle">
+    通过门控网络选择概率最高的 K 个专家执行计算
+  </text>
+</svg>
